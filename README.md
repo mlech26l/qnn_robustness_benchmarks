@@ -1,4 +1,4 @@
-# Benchmark networks of the AAAI 2021 paper Scalable Verification of Quantized Neural Networks
+# Benchmark networks of the AAAI 2021 paper **Scalable Verification of Quantized Neural Networks**
 
 [Link to the technical report (arXiv)](https://arxiv.org/pdf/2012.08185.pdf)
 
