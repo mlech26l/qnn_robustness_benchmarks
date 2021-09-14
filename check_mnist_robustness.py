@@ -15,7 +15,7 @@ parser.add_argument("--export", action="store_true")
 args = parser.parse_args()
 
 
-if args.dataset == "fashion":
+if args.dataset == "fashion-mnist":
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.fashion_mnist.load_data()
 elif args.dataset == "mnist":
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()

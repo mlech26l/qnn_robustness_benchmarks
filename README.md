@@ -30,7 +30,7 @@ cd build
 make
 ```
 
-## Running the encoding and SMT solvers
+## Running the Bit-vector SMT encodings on the benchmarks
 
 ```bash
 # Checking MNIST test set sample 1 with epsilon=1
@@ -38,10 +38,24 @@ python3 check_mnist_robustness.py --sample_id 1 --eps 1
 # Checking MNIST test set sample 115 with epsilon=2
 python3 check_mnist_robustness.py --sample_id 115 --eps 2
 # Checking MNIST test set sample 200 with epsilon=3
-python3 check_mnist_robustness.py --sample_id 200 --eps 3 --dataset fashion
+python3 check_mnist_robustness.py --sample_id 200 --eps 3 --dataset fashion-mnist
 ```
 
-## Results from the paper
+## Using the benchmarks for other method
+
+The file ```iterate_samples.py``` shows how to load and use the networks.
+It also iterates over the exact samples of the benchmark and output the corresponding epsilons to use.
+
+```bash
+python3 iterate_samples.py --dataset fashion-mnist
+```
+
+When implementing some verification method of the networks of these benchmarks, 
+make sure they exactly match the bit-exact quantized rounding semantics in each layer. 
+The files ```quantization_layers.py``` and ```quantization_utils.py``` should serve as a good starting point.
+
+
+## Benchmark description
 
 The benchmark consists of robustness verification queries.
 
@@ -65,18 +79,7 @@ Epsilons (L-infinity norm) | 1,2,3,4
 Weights | ```weights/fashion-mnist_mlp.h5```
 
 
-The file ```iterate_samples.py``` shows how to load and use the networks.
-It also iterates over the exact samples of the benchmark and output the corresponding epsilons to use.
-
-```bash
-python3 iterate_samples.py --dataset fashion-mnist
-```
-
-When implementing some verification method of the networks of these benchmarks, 
-make sure they exactly match the bit-exact quantized rounding semantics in each layer. 
-The files ```quantization_layers.py``` and ```quantization_utils.py``` should serve as a good starting point.
-
-## Quantitative results of the bit-vector SMT-based verification
+## Quantitative results from the paper
 
 ### MNIST samples 0-99
 
