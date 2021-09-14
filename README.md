@@ -1,6 +1,47 @@
 # Benchmark networks of the AAAI 2021 paper **Scalable Verification of Quantized Neural Networks**
 
-[Link to the technical report (arXiv)](https://arxiv.org/pdf/2012.08185.pdf)
+[Link to the arXiv version](https://arxiv.org/pdf/2012.08185.pdf)
+
+When using or adapting the code and benchmarks, please cite
+
+```bibtex
+@inproceedings{henzinger2021scalable,
+  title={Scalable Verification of Quantized Neural Networks},
+  author={Henzinger, Thomas A and Lechner, Mathias and {\v{Z}}ikeli{\'c}, {\DJ}or{\dj}e},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={35},
+  number={5},
+  pages={3787--3795},
+  year={2021}
+}
+```
+
+## Setup
+
+Installing boolector
+
+```bash
+git clone https://github.com/boolector/boolector
+cd boolector
+./contrib/setup-cadical.sh
+./contrib/setup-btor2tools.sh
+./configure.sh --python --py3
+cd build
+make
+```
+
+## Running the encoding and SMT solvers
+
+```bash
+# Checking MNIST test set sample 1 with epsilon=1
+python3 check_mnist_robustness.py --sample_id 1 --eps 1
+# Checking MNIST test set sample 115 with epsilon=2
+python3 check_mnist_robustness.py --sample_id 115 --eps 2
+# Checking MNIST test set sample 200 with epsilon=3
+python3 check_mnist_robustness.py --sample_id 200 --eps 3 --dataset fashion
+```
+
+## Results from the paper
 
 The benchmark consists of robustness verification queries.
 
@@ -108,3 +149,16 @@ Misclassified (6) | 316, 322, 324, 325, 332, 344
 Timeout (26) | 300, 301, 302, 304, 312, 313, 309, 308, 311, 315, 318, 319, 320, 321, 323, 326, 329, 331, 333, 334, 336, 337, 338, 341, 342, 348
 Vulnerable (0) | -
 Robust (18) | Remaining
+
+
+## Using other SMT solvers
+
+Each benchmark SMT formula can be exported and then checked by a different SMT solver than boolector
+
+For instance, CVC4 (note: this will not terminate)
+
+```bash
+python3 check_mnist_robustness.py --sample_id 115 --eps 2 --export
+./cvc4-1.8-x86_64-linux-opt  --lang smt smt2/mnist_0115.smt2
+```
+

@@ -67,7 +67,7 @@ class QuantizedModel(tf.keras.Model):
         return x
 
     def call(self, inputs, **kwargs):
-        x = self.preprocess(inputs)
+        x = self.preprocess(tf.cast(inputs,tf.float32))
         x = self.flatten_layer(x)
         for c in self.dense_layers:
             if self.dropout_rate > 0.0:
