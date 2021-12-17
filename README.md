@@ -61,7 +61,7 @@ The benchmark consists of robustness verification queries.
 
 Benchmark 1 | MNIST 
 --- | --- 
-Network size | 784-64-32-10 
+Network size | 784-64-10 
 Input quantization | 8-bit 
 Network quanization (weights and activations) | 6-bit
 Samples | 400 (100 per epsilon value)
@@ -71,7 +71,7 @@ Weights | ```weights/mnist_mlp.h5```
 
 Benchmark 2 | Fashion-MNIST 
 --- | --- 
-Network size | 784-64-32-10 
+Network size | 784-64-10 
 Input quantization | 8-bit 
 Network quanization (weights and activations) | 6-bit
 Samples | 300 (50/100 per epsilon value)
